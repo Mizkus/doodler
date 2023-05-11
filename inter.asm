@@ -25,7 +25,7 @@ main:
 jump:
 	ldi r3, 0xf0
 	ld r3, r3
-	ldi r0, 10
+	ldi r0, 11	
 	if
 	cmp r3, r0
 	is pl
