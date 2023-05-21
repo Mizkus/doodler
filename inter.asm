@@ -8,13 +8,13 @@ dc main
 
 asect 0x00
 ###################
+# Turn on         #
 # Enable          #
 #   interaptions  #
 ###################
 setsp 0xf0        #
 ei                #
 ###################
-
 
 main:
 	wait
