@@ -1,26 +1,24 @@
-asect 0xf2
+asect 0xfa
 dc jump
 dc main
 
+dc updMaxScore
+dc main
 
 
 asect 0x00
 ###################
-# Turn on         #
+# Enable          #
 #   interaptions  #
 ###################
-setsp 0xf0		  #	
-ldi r3, 0x09      #
-push r3			  #	
-ldi r3, 0x80      #
-push r3			  #	
-rti               #
-setsp 0x00        #
+setsp 0xf0        #
+ei                #
 ###################
 
 
 main:
 	wait
+	br main
 	
 jump:
 	ldi r3, 0xf0
@@ -47,8 +45,51 @@ jump:
 		fi
 	fi
 	ldi r0, 0
-	br main
+	rti
 
-
-
+updMaxScore:
+	ldi r1, 0xf1
+	ld r1, r1
+	
+	ldi r2, 0xf3
+	ld r2, r2
+	
+	
+	if
+	cmp r1, r2
+	is gt
+		ldi r2, 0xf3
+		st r2, r1
+		
+		ldi r1, 0xf2
+		ld r1, r1
+		ldi r2, 0xf4
+		st r2, r1
+	else
+		if
+		cmp r1, r2
+		is eq
+			if
+			ldi r3, 0xf2
+			ld r3, r3
+		
+			ldi r2, 0xf4
+			ld r2, r2
+				
+			cmp r3, r2
+			is gt
+				ldi r2, 0xf4
+				st r2, r3
+			
+				ldi r1, 0xf1
+				ld r1, r1
+				ldi r2, 0xf3
+				st r2, r1
+			fi
+		fi
+	fi
+	ldi r0, 11
+	ldi r0, 0
+	rti
+	
 end
